@@ -197,7 +197,7 @@
     </div>
     <!-- dataframe table CB成交溢價率-->
     <div id="table-container" class="container mt-5">  
-        <h2>CB成交溢價率</h2>
+        <h2>CB成交溢價率 (CB理論價 > 95 )</h2>
         <table id="myTable" class="display">
             <thead>
                 <tr>
@@ -219,7 +219,7 @@
     <script type="text/javascript">
         function formatPercentage(data) {
             if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
-                return parseFloat(data*100).toFixed(2) + '%';
+                return parseFloat(data).toFixed(2) ;
             }
             return '';
         }
