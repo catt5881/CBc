@@ -64,6 +64,28 @@
         #myTable tbody tr {
             background-color: #fff; /* 行背景颜色 */
         }
+        #table2-container {
+            width: 80%; /* 调整表格容器宽度 */
+            margin: auto; /* 居中显示 */
+        }
+
+        #myTable2 {
+            font-size: 0.9em; /* 调整字体大小 */
+            width: 100%; /* 表格宽度 */
+        }
+
+        #myTable2 th, #myTable2 td {
+            padding: 8px; /* 单元格内边距 */
+        }
+
+        #myTable2 thead th {
+            background-color: #f2f2f2; /* 表头背景颜色 */
+            color: #333; /* 表头字体颜色 */
+        }
+
+        #myTable2 tbody tr {
+            background-color: #fff; /* 行背景颜色 */
+        }
     </style>
 
 </head>
@@ -107,72 +129,12 @@
     <img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt="">
     <img class="d-block" src="catt.jpg" id="imgCat" alt="">
 
-
-    <div class="mt-5 container">
+    <!-- CB指數photo-->
+    <div class="mt-5 container" id="CB指數 iframe">
+        <h2>CB指數</h2>
         <iframe src="CB指數日線PR.html" style="width:100%; height:600px;" alt="CB指數日線PR"></iframe>
         <iframe src="CB指數月線_MA.html" style="width:100%; height:600px;" alt="CB指數月線_MA"></iframe>
     </div>
-    <div class="mt-5 container">
-        <iframe src="CB溢價率.html" style="width:100%; height:600px;" alt="CB溢價率"></iframe>
-        <iframe src="CB成交溢價率_平均數_bollinger_N倍標準差.html" style="width:100%; height:600px;" alt="CB成交溢價率_平均數_bollinger_N倍標準差"></iframe>
-    </div>
-    
-<!-- dataframe table CB成交溢價率-->
-
-
-    <div id="table-container" class="container mt-5">
-        <h2>CB成交溢價率</h2>
-        <table id="myTable" class="display">
-            <thead>
-                <tr>
-                    <th>date</th>
-                    <th>PR5</th>
-                    <th>PR25</th>
-                    <th>PR50</th>
-                    <th>PR75</th>
-                    <th>PR95</th>
-                    <th>平均數</th>
-                    <th>檔數</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 数据将被动态填充 -->
-            </tbody>
-        </table>
-    </div>
- 
-    <script type="text/javascript">
-        function formatPercentage(data) {
-            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
-                return parseFloat(data*100).toFixed(2) + '%';
-            }
-            return '';
-        }
-
-        $(document).ready(function() {
-            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/new_CB成交溢價率.csv', {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    $('#myTable').DataTable({
-                        data: results.data,
-                        order: [[0, 'desc']],  // 根据日期列进行降序排序
-                        columns: [
-                            { data: 'date' },
-                            { data: 'PR5', render: formatPercentage },
-                            { data: 'PR25', render: formatPercentage },
-                            { data: 'PR50', render: formatPercentage },
-                            { data: 'PR75', render: formatPercentage },
-                            { data: 'PR95', render: formatPercentage },
-                            { data: '平均數', render: formatPercentage },
-                            { data: '檔數' , defaultContent: "无数据"  }
-                        ]
-                    });
-                }
-            });
-        });
-    </script>
-
     <!-- dataframe table CB指數日線PR-->
     <div id="table2-container" class="container mt-5">
         <h2>CB指數</h2>
@@ -194,7 +156,6 @@
             </tbody>
         </table>
     </div>
-
     <script type="text/javascript">
         function formatPercentage(data) {
             if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
@@ -219,13 +180,121 @@
                             { data: 'PR75', render: formatPercentage },
                             { data: 'PR95', render: formatPercentage },
                             { data: '平均數', render: formatPercentage },
-                            { data: '檔數' , defaultContent: "无数据"  }
+                            { data: '檔數' , defaultContent: "無數據"  }
                         ]
                     });
                 }
             });
         });
     </script>
+
+
+    <!-- CB成交溢價率photo-->
+    <div class="mt-5 container" id="CB成交溢價率 iframe">
+        <h2>CB成交溢價率</h2>
+        <iframe src="CB溢價率.html" style="width:100%; height:600px;" alt="CB溢價率"></iframe>
+        <iframe src="CB成交溢價率_平均數_bollinger_N倍標準差.html" style="width:100%; height:600px;" alt="CB成交溢價率_平均數_bollinger_N倍標準差"></iframe>
+    </div>
+    <!-- dataframe table CB成交溢價率-->
+    <div id="table-container" class="container mt-5">  
+        <h2>CB成交溢價率</h2>
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>PR5</th>
+                    <th>PR25</th>
+                    <th>PR50</th>
+                    <th>PR75</th>
+                    <th>PR95</th>
+                    <th>平均數</th>
+                    <th>檔數</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将被动态填充 -->
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function formatPercentage(data) {
+            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
+                return parseFloat(data*100).toFixed(2) + '%';
+            }
+            return '';
+        }
+
+        $(document).ready(function() {
+            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/new_CB成交溢價率.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#myTable').DataTable({
+                        data: results.data,//
+                        order: [[0, 'desc']],  // 根据日期列进行降序排序
+                        columns: [
+                            { data: 'date' },
+                            { data: 'PR5', render: formatPercentage },
+                            { data: 'PR25', render: formatPercentage },
+                            { data: 'PR50', render: formatPercentage },
+                            { data: 'PR75', render: formatPercentage },
+                            { data: 'PR95', render: formatPercentage },
+                            { data: '平均數', render: formatPercentage },
+                            { data: '檔數' , defaultContent: "無數據"  }
+                        ]
+                    });
+                }
+            });
+        });
+    </script>
+
+
+    <!-- 上市櫃_融資維持率-->
+    <div class="mt-5 container" id="上市櫃_融資維持率 iframe">
+        <h2>上市櫃_融資維持率</h2>
+        <iframe src="上市櫃_融資維持率.html" style="width:100%; height:800px;" alt="上市櫃_融資維持率"></iframe>
+    </div>
+    <!-- dataframe table 上市櫃_融資維持率-->
+    <div id="table3-container" class="container mt-5">  
+        <h2>上市櫃_融資維持率</h2>
+        <table id="myTable3" class="display">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>融資維持率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将被动态填充 -->
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function formatPercentage(data) {
+            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
+                return parseFloat(data).toFixed(2) ;
+            }
+            return '';
+        }
+
+        $(document).ready(function() {
+            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/上市櫃_融資維持率.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#myTable3').DataTable({
+                        data: results.data,//
+                        order: [[0, 'desc']],  // 根据日期列进行降序排序
+                        columns: [
+                            { data: 'date' , defaultContent: "無數據"},
+                            { data: '融資維持率' , defaultContent: "無數據"  }
+                        ]
+                    });
+                }
+            });
+        });
+    </script>
+
 
 ...
 
