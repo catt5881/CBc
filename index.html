@@ -5,8 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CB Charts</title>
+
+    <!-- 引入jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- 引入DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+    <!-- 引入DataTables JavaScript -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    
+    <!-- 引入Papa Parse库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <style>
         #imgHead{
@@ -29,6 +42,28 @@
             margin-top: -80px;
             
 
+        }
+        #table-container {
+            width: 80%; /* 调整表格容器宽度 */
+            margin: auto; /* 居中显示 */
+        }
+
+        #myTable {
+            font-size: 0.9em; /* 调整字体大小 */
+            width: 100%; /* 表格宽度 */
+        }
+
+        #myTable th, #myTable td {
+            padding: 8px; /* 单元格内边距 */
+        }
+
+        #myTable thead th {
+            background-color: #f2f2f2; /* 表头背景颜色 */
+            color: #333; /* 表头字体颜色 */
+        }
+
+        #myTable tbody tr {
+            background-color: #fff; /* 行背景颜色 */
         }
     </style>
 
@@ -75,13 +110,122 @@
 
 
     <div class="mt-5 container">
-        <iframe src="CB指數日線PR.html" style="width:100%; height:500px;" alt="CB指數日線PR"></iframe>
-        <iframe src="CB指數月線_MA.html" style="width:100%; height:500px;" alt="CB指數月線_MA"></iframe>
+        <iframe src="CB指數日線PR.html" style="width:100%; height:600px;" alt="CB指數日線PR"></iframe>
+        <iframe src="CB指數月線_MA.html" style="width:100%; height:600px;" alt="CB指數月線_MA"></iframe>
     </div>
     <div class="mt-5 container">
-        <iframe src="CB溢價率.html" style="width:100%; height:500px;" alt="CB溢價率"></iframe>
-        <iframe src="CB成交溢價率_平均數_bollinger_N倍標準差.html" style="width:100%; height:500px;" alt="CB成交溢價率_平均數_bollinger_N倍標準差"></iframe>
+        <iframe src="CB溢價率.html" style="width:100%; height:600px;" alt="CB溢價率"></iframe>
+        <iframe src="CB成交溢價率_平均數_bollinger_N倍標準差.html" style="width:100%; height:600px;" alt="CB成交溢價率_平均數_bollinger_N倍標準差"></iframe>
     </div>
+    
+<!-- dataframe table CB成交溢價率-->
+
+
+    <div id="table-container" class="container mt-5">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>PR5</th>
+                    <th>PR25</th>
+                    <th>PR50</th>
+                    <th>PR75</th>
+                    <th>PR95</th>
+                    <th>平均數</th>
+                    <th>檔數</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将被动态填充 -->
+            </tbody>
+        </table>
+    </div>
+ 
+    <script type="text/javascript">
+        function formatPercentage(data) {
+            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
+                return parseFloat(data*100).toFixed(2) + '%';
+            }
+            return '';
+        }
+
+        $(document).ready(function() {
+            Papa.parse('http://localhost:8000/new_CB成交溢價率.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#myTable').DataTable({
+                        data: results.data,
+                        order: [[0, 'desc']],  // 根据日期列进行降序排序
+                        columns: [
+                            { data: 'date' },
+                            { data: 'PR5', render: formatPercentage },
+                            { data: 'PR25', render: formatPercentage },
+                            { data: 'PR50', render: formatPercentage },
+                            { data: 'PR75', render: formatPercentage },
+                            { data: 'PR95', render: formatPercentage },
+                            { data: '平均數', render: formatPercentage },
+                            { data: '檔數' , defaultContent: "无数据"  }
+                        ]
+                    });
+                }
+            });
+        });
+    </script>
+
+<!-- dataframe table CB指數日線PR-->
+<div id="table2-container" class="container mt-5">
+    <table id="myTable2" class="display">
+        <thead>
+            <tr>
+                <th>date</th>
+                <th>PR5</th>
+                <th>PR25</th>
+                <th>PR50</th>
+                <th>PR75</th>
+                <th>PR95</th>
+                <th>平均數</th>
+                <th>檔數</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 数据将被动态填充 -->
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function formatPercentage(data) {
+        if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
+            return parseFloat(data).toFixed(2) ;
+        }
+        return '';
+    }
+
+    $(document).ready(function() {
+        Papa.parse('http://localhost:8000/CB指數日線PR.csv', {
+            download: true,
+            header: true,
+            complete: function(results) {
+                $('#myTable2').DataTable({
+                    data: results.data,
+                    order: [[0, 'desc']],  // 根据日期列进行降序排序
+                    columns: [
+                        { data: 'date' },
+                        { data: 'PR5', render: formatPercentage },
+                        { data: 'PR25', render: formatPercentage },
+                        { data: 'PR50', render: formatPercentage },
+                        { data: 'PR75', render: formatPercentage },
+                        { data: 'PR95', render: formatPercentage },
+                        { data: '平均數', render: formatPercentage },
+                        { data: '檔數' , defaultContent: "无数据"  }
+                    ]
+                });
+            }
+        });
+    });
+</script>
+
 ...
 
     <!-- Footer -->>
