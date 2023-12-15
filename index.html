@@ -150,7 +150,7 @@
         }
 
         $(document).ready(function() {
-            Papa.parse('http://localhost:8000/new_CB成交溢價率.csv', {
+            Papa.parse('new_CB成交溢價率.csv', {
                 download: true,
                 header: true,
                 complete: function(results) {
@@ -203,7 +203,7 @@
     }
 
     $(document).ready(function() {
-        Papa.parse('http://localhost:8000/CB指數日線PR.csv', {
+        Papa.parse('CB指數日線PR.csv', {
             download: true,
             header: true,
             complete: function(results) {
