@@ -14,7 +14,7 @@
 
     <!-- 引入DataTables JavaScript -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    
+    <script type="text2/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <!-- 引入Papa Parse库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
@@ -174,59 +174,59 @@
         });
     </script>
 
-<!-- dataframe table CB指數日線PR-->
-<div id="table2-container" class="container mt-5">
-    <h2>CB指數</h2>
-    <table id="myTable2" class="display">
-        <thead>
-            <tr>
-                <th>date</th>
-                <th>PR5</th>
-                <th>PR25</th>
-                <th>PR50</th>
-                <th>PR75</th>
-                <th>PR95</th>
-                <th>平均數</th>
-                <th>檔數</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- 数据将被动态填充 -->
-        </tbody>
-    </table>
-</div>
+    <!-- dataframe table CB指數日線PR-->
+    <div id="table2-container" class="container mt-5">
+        <h2>CB指數</h2>
+        <table id="myTable2" class="display">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>PR5</th>
+                    <th>PR25</th>
+                    <th>PR50</th>
+                    <th>PR75</th>
+                    <th>PR95</th>
+                    <th>平均數</th>
+                    <th>檔數</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将被动态填充 -->
+            </tbody>
+        </table>
+    </div>
 
-<script type="text/javascript">
-    function formatPercentage(data) {
-        if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
-            return parseFloat(data).toFixed(2) ;
-        }
-        return '';
-    }
-
-    $(document).ready(function() {
-        Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/CB指數日線PR.csv', {
-            download: true,
-            header: true,
-            complete: function(results) {
-                $('#myTable2').DataTable({
-                    data: results.data,
-                    order: [[0, 'desc']],  // 根据日期列进行降序排序
-                    columns: [
-                        { data: 'date' },
-                        { data: 'PR5', render: formatPercentage },
-                        { data: 'PR25', render: formatPercentage },
-                        { data: 'PR50', render: formatPercentage },
-                        { data: 'PR75', render: formatPercentage },
-                        { data: 'PR95', render: formatPercentage },
-                        { data: '平均數', render: formatPercentage },
-                        { data: '檔數' , defaultContent: "无数据"  }
-                    ]
-                });
+    <script type="text2/javascript">
+        function formatPercentage(data) {
+            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
+                return parseFloat(data).toFixed(2) ;
             }
+            return '';
+        }
+
+        $(document).ready(function() {
+            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/CB指數日線PR.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#myTable2').DataTable({
+                        data: results.data,
+                        order: [[0, 'desc']],  // 根据日期列进行降序排序
+                        columns: [
+                            { data: 'date' },
+                            { data: 'PR5', render: formatPercentage },
+                            { data: 'PR25', render: formatPercentage },
+                            { data: 'PR50', render: formatPercentage },
+                            { data: 'PR75', render: formatPercentage },
+                            { data: 'PR95', render: formatPercentage },
+                            { data: '平均數', render: formatPercentage },
+                            { data: '檔數' , defaultContent: "无数据"  }
+                        ]
+                    });
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 ...
 
