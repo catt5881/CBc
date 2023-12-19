@@ -219,15 +219,18 @@
                 <th>近一季營業利益率</th>
                 <th>近一季稅後淨利率</th>
                 <th>近一季每股盈餘EPS</th>
-                <th>營業毛利年增率</th>
-                <th>營業利益年增率</th>
-                <th>稅後淨利年增率</th>
-                <th>EPS年增率</th>
+                <th>營業毛利年增率(A)</th>
+                <th>營業利益年增率(B)</th>
+                <th>稅後淨利年增率(C)</th>
+                <th>EPS年增率(D)</th>
                 <th>近一日殖利率</th>
                 <th>近一日外資買賣超張數</th>
                 <th>近一日投信買賣超張數</th>
+                <th>A+B+C+D(滿分40)</th>
                 <th>name</th>
                 <th>category</th>
+
+
             </tr>
         </thead>
         <tbody>
@@ -268,8 +271,11 @@
                         { data: '近一日殖利率' , defaultContent: 'N/A' },
                         { data: '最近一日外資買賣超張數' , defaultContent: 'N/A' },
                         { data: '最近一日投信買賣超張數' , defaultContent: 'N/A' },
+                        { data: 'A+B+C+D' , defaultContent: 'N/A' },
                         { data: 'name' , defaultContent: 'N/A' },
                         { data: 'category' , defaultContent: 'N/A' , className: 'category-column' }
+
+
                     ]
                 });
             }
