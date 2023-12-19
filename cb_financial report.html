@@ -67,7 +67,30 @@
         #myTable tbody tr {
             background-color: #fff;
         }
-        
+
+        #table2-container {
+            width: 100%;
+            margin: auto;
+        }
+
+        #myTable2 {
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        #myTable2 th, #myTable td {
+            padding: 8px;
+        }
+
+        #myTable2 thead th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        #myTable2 tbody tr {
+            background-color: #fff;
+        }
+
         .category-column {
             width: 40%; /* 设置category列的宽度 */
         }
@@ -145,7 +168,6 @@
             </tbody>
         </table>
     </div>
-
     <script type="text/javascript">
         $(document).ready(function() {
             Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/df_combined.csv', {
@@ -179,7 +201,81 @@
         });
     </script>
 
-  
+<div id="table2-container" class="container mt-5">
+    <h2>CB現股財報評分1~10級(分數越高，代表數值在歷史資料中，數值越高)</h2>
+    <table id="myTable2" class="display">
+        <thead>
+            <tr>
+                <th>stock_id</th>
+                <th>近一日收盤價</th>
+                <th>近一季股本</th>
+                <th>近一季合約負債_流動</th>
+                <th>當月營收</th>
+                <th>近3月平均營收</th>
+                <th>近12月平均營收</th>
+                <th>營收年增率</th>
+                <th>營收月增率</th>
+                <th>近一季營業毛利率</th>
+                <th>近一季營業利益率</th>
+                <th>近一季稅後淨利率</th>
+                <th>近一季每股盈餘EPS</th>
+                <th>營業毛利年增率</th>
+                <th>營業利益年增率</th>
+                <th>稅後淨利年增率</th>
+                <th>EPS年增率</th>
+                <th>近一日殖利率</th>
+                <th>近一日外資買賣超張數</th>
+                <th>近一日投信買賣超張數</th>
+                <th>name</th>
+                <th>category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 数据将被动态填充 -->
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/df_combined_評分.csv', {
+            download: true,
+            header: true,
+            complete: function(results) {
+                // 过滤数据
+                var filteredData = results.data.filter(function(row) {return row.stock_id && !isNaN(row.stock_id) && row.stock_id !== '0'; });
+
+                // 使用过滤后的数据初始化DataTables
+                $('#myTable2').DataTable({
+                    data: filteredData ,
+                    columns: [
+                        { data: 'stock_id' , defaultContent: 'N/A'},
+                        { data: '近一日收盤價' , defaultContent: 'N/A' },
+                        { data: '近一季股本' , defaultContent: 'N/A' },
+                        { data: '近一季合約負債_流動' , defaultContent: 'N/A' },
+                        { data: '當月營收' , defaultContent: 'N/A' },
+                        { data: '近3月平均營收' , defaultContent: 'N/A' },
+                        { data: '近12月平均營收' , defaultContent: 'N/A' },
+                        { data: 'rev_year_growth_營收年增率' , defaultContent: 'N/A' },
+                        { data: 'rev_month_growth_營收月增率' , defaultContent: 'N/A' },
+                        { data: '近一季營業毛利率' , defaultContent: 'N/A' },
+                        { data: '近一季營業利益率' , defaultContent: 'N/A' },
+                        { data: '近一季稅後淨利率' , defaultContent: 'N/A' },
+                        { data: '近一季每股盈餘EPS' , defaultContent: 'N/A' },
+                        { data: '最近一季營業毛利年增率' , defaultContent: 'N/A' },
+                        { data: '近一季營業利益年增率' , defaultContent: 'N/A' },
+                        { data: '近一季稅後淨利年增率' , defaultContent: 'N/A' },
+                        { data: 'eps_growth_rate_EPS年增率' , defaultContent: 'N/A' },
+                        { data: '近一日殖利率' , defaultContent: 'N/A' },
+                        { data: '最近一日外資買賣超張數' , defaultContent: 'N/A' },
+                        { data: '最近一日投信買賣超張數' , defaultContent: 'N/A' },
+                        { data: 'name' , defaultContent: 'N/A' },
+                        { data: 'category' , defaultContent: 'N/A' , className: 'category-column' }
+                    ]
+                });
+            }
+        });
+    });
+</script> 
 
 ...
 
