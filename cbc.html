@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CB Charts</title>
+    <link rel="icon" type="image/png" href="logo.jpg">
 
+    
     <!-- 引入jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -31,14 +33,14 @@
             margin-top: -8px;
         }
         #imgCat{
-            width: 150px;
-            height: 150px;
+            width: 5%;
+            height: 5%;
             max-width: 30%;
-            max-height: 30%;
+            max-height: 30%; 
             border-radius: 50%;
             margin-left: auto;
             margin-right: auto;
-            margin-top: -80px;
+            margin-top: -20px;
             
 
         }
@@ -99,10 +101,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="cbc.html">CB</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -126,7 +128,7 @@
         </div>
     </nav>
 
-    <img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt="">
+    <!--<img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt=""> -->
     <img class="d-block" src="catt.jpg" id="imgCat" alt="">
 
     <!-- CB指數photo-->
@@ -249,52 +251,6 @@
         });
     </script>
 
-
-    <!-- 上市櫃_融資維持率-->
-    <div class="mt-5 container" id="上市櫃_融資維持率 iframe">
-        <h2>上市櫃_融資維持率</h2>
-        <iframe src="上市櫃_融資維持率.html" style="width:140%; height:800px;" alt="上市櫃_融資維持率"></iframe>
-    </div>
-    <!-- dataframe table 上市櫃_融資維持率-->
-    <div id="table3-container" class="container mt-5">  
-        <h2>上市櫃_融資維持率</h2>
-        <table id="myTable3" class="display">
-            <thead>
-                <tr>
-                    <th>date</th>
-                    <th>融資維持率</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 数据将被动态填充 -->
-            </tbody>
-        </table>
-    </div>
-    <script type="text/javascript">
-        function formatPercentage(data) {
-            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
-                return parseFloat(data).toFixed(2) ;
-            }
-            return '';
-        }
-
-        $(document).ready(function() {
-            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/上市櫃_融資維持率.csv', {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    $('#myTable3').DataTable({
-                        data: results.data,//
-                        order: [[0, 'desc']],  // 根据日期列进行降序排序
-                        columns: [
-                            { data: 'date' , defaultContent: "無數據"},
-                            { data: '融資維持率' , defaultContent: "無數據"  }
-                        ]
-                    });
-                }
-            });
-        });
-    </script>
 
 
 ...
