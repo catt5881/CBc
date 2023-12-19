@@ -44,50 +44,35 @@
             
 
         }
+        
         #table-container {
-            width: 80%; /* 调整表格容器宽度 */
-            margin: auto; /* 居中显示 */
+            width: 100%;
+            margin: auto;
         }
 
         #myTable {
-            font-size: 0.9em; /* 调整字体大小 */
-            width: 100%; /* 表格宽度 */
+            font-size: 0.9em;
+            width: 100%;
         }
 
         #myTable th, #myTable td {
-            padding: 8px; /* 单元格内边距 */
+            padding: 8px;
         }
 
         #myTable thead th {
-            background-color: #f2f2f2; /* 表头背景颜色 */
-            color: #333; /* 表头字体颜色 */
+            background-color: #f2f2f2;
+            color: #333;
         }
 
         #myTable tbody tr {
-            background-color: #fff; /* 行背景颜色 */
+            background-color: #fff;
         }
-        #table2-container {
-            width: 80%; /* 调整表格容器宽度 */
-            margin: auto; /* 居中显示 */
-        }
-
-        #myTable2 {
-            font-size: 0.9em; /* 调整字体大小 */
-            width: 100%; /* 表格宽度 */
+        
+        .category-column {
+            width: 40%; /* 设置category列的宽度 */
         }
 
-        #myTable2 th, #myTable2 td {
-            padding: 8px; /* 单元格内边距 */
-        }
 
-        #myTable2 thead th {
-            background-color: #f2f2f2; /* 表头背景颜色 */
-            color: #333; /* 表头字体颜色 */
-        }
-
-        #myTable2 tbody tr {
-            background-color: #fff; /* 行背景颜色 */
-        }
     </style>
 
 </head>
@@ -129,11 +114,69 @@
           </form>
         </div>
     </nav>
-
     <!--<img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt=""> -->
     <img class="d-block" src="catt.jpg" id="imgCat" alt="">
 
- 
+
+
+
+    <div id="table-container" class="container mt-5">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>stock_id</th>
+                    <th>近一日收盤價</th>
+                    <th>近一季股本</th>
+                    <th>營收年增率</th>
+                    <th>營收月增率</th>
+                    <th>營業毛利年增率</th>
+                    <th>營業利益年增率</th>
+                    <th>稅後淨利年增率</th>
+                    <th>EPS年增率</th>
+                    <th>殖利率</th>
+                    <th>投信買賣超張數</th>
+                    <th>name</th>
+                    <th>category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将被动态填充 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/df_combined.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    // 过滤数据
+                    var filteredData = results.data.filter(function(row) {return row.stock_id && !isNaN(row.stock_id) && row.stock_id !== '0'; });
+
+                    // 使用过滤后的数据初始化DataTables
+                    $('#myTable').DataTable({
+                        data: filteredData ,
+                        columns: [
+                            { data: 'stock_id' , defaultContent: 'N/A'},
+                            { data: '近一日收盤價' , defaultContent: 'N/A' },
+                            { data: '近一季股本' , defaultContent: 'N/A' },
+                            { data: 'rev_year_growth年增率' , defaultContent: 'N/A' },
+                            { data: 'rev_month_growth月增率' , defaultContent: 'N/A' },
+                            { data: '最近一季營業毛利年增率' , defaultContent: 'N/A' },
+                            { data: '近一季營業利益年增率' , defaultContent: 'N/A' },
+                            { data: '近一季稅後淨利年增率' , defaultContent: 'N/A' },
+                            { data: 'eps_growth_rate_EPS年增率' , defaultContent: 'N/A' },
+                            { data: '近一日殖利率' , defaultContent: 'N/A' },
+                            { data: '最近一日投信買賣超張數' , defaultContent: 'N/A' },
+                            { data: 'name' , defaultContent: 'N/A' },
+                            { data: 'category' , defaultContent: 'N/A' , className: 'category-column' }
+                        ]
+                    });
+                }
+            });
+        });
+    </script>
 
   
 
@@ -141,81 +184,84 @@
 
     <!-- Footer -->>
     <footer>
-    <div class="container my-5">
+        <div class="container my-5">
 
-        <footer class="text-center text-white" style="background-color: #f1f1f1;">
-        <!-- Grid container -->
-        <div class="container pt-4">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-            <!-- Facebook -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-facebook-f"></i
-            ></a>
-    
-            <!-- Twitter -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-twitter"></i
-            ></a>
-    
-            <!-- Google -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-google"></i
-            ></a>
-    
-            <!-- Instagram -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-instagram"></i
-            ></a>
-    
-            <!-- Linkedin -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-linkedin"></i
-            ></a>
-            <!-- Github -->
-            <a
-            class="btn btn-link btn-floating btn-lg text-dark m-1"
-            href="#!"
-            role="button"
-            data-mdb-ripple-color="dark"
-            ><i class="fab fa-github"></i
-            ></a>
-        </section>
-        <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-    
-        <!-- Copyright -->
-        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 Copyright:
-        <a class="text-dark" href="Catt/">Catt</a>
-        <h2>資料每日晚上9點後才更新</h2>
-
-        </div>
-        <!-- Copyright -->
-    </footer>
+            <footer class="text-center text-white" style="background-color: #f1f1f1;">
+            <!-- Grid container -->
+            <div class="container pt-4">
+            <!-- Section: Social media -->
+            
+            <section class="mb-4">
+                
+                <!-- Facebook -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
         
-    </div>
+                <!-- Twitter -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-twitter"></i
+                ></a>
+        
+                <!-- Google -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-google"></i
+                ></a>
+        
+                <!-- Instagram -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-instagram"></i
+                ></a>
+        
+                <!-- Linkedin -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-linkedin"></i
+                ></a>
+                <!-- Github -->
+                <a
+                class="btn btn-link btn-floating btn-lg text-dark m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="fab fa-github"></i
+                ></a>
+            </section> 
+            <!-- Section: Social media -->
+            
+            </div>
+            <!-- Grid container -->
+        
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a class="text-dark" href="Catt/">Catt</a>
+            <h2>資料每日晚上9點後才更新</h2>
+
+            </div>
+            <!-- Copyright -->
+        </footer>
+            
+        </div>
     </footer>
     <!-- Footer -->>
 
