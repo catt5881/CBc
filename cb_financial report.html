@@ -91,7 +91,7 @@
             background-color: #fff;
         }
         .stock_id-column-column {
-            width: 1%; /* 设置category列的宽度 */
+            width: 0.5%; /* 设置category列的宽度 */
         }
         .name-column {
             width: 5%; /* 设置category列的宽度 */
@@ -271,25 +271,25 @@
                             }
                         },
                         { data: 'name' , defaultContent: 'N/A' , className: ' name-column'},
-                        { data: '近一日收盤價' , defaultContent: 'N/A' },
-                        { data: '近一季股本' , defaultContent: 'N/A' },
-                        { data: '近一季合約負債_流動' , defaultContent: 'N/A' },
-                        { data: '當月營收' , defaultContent: 'N/A' },
-                        { data: '近3月平均營收' , defaultContent: 'N/A' },
-                        { data: '近12月平均營收' , defaultContent: 'N/A' },
-                        { data: 'rev_year_growth_營收年增率' , defaultContent: 'N/A' },
-                        { data: 'rev_month_growth_營收月增率' , defaultContent: 'N/A' },
-                        { data: '近一季營業毛利率' , defaultContent: 'N/A' },
-                        { data: '近一季營業利益率' , defaultContent: 'N/A' },
-                        { data: '近一季稅後淨利率' , defaultContent: 'N/A' },
-                        { data: '近一季每股盈餘EPS' , defaultContent: 'N/A' },
-                        { data: '最近一季營業毛利年增率' , defaultContent: 'N/A' },
-                        { data: '近一季營業利益年增率' , defaultContent: 'N/A' },
-                        { data: '近一季稅後淨利年增率' , defaultContent: 'N/A' },
-                        { data: 'eps_growth_rate_EPS年增率' , defaultContent: 'N/A' },
-                        { data: '近一日殖利率' , defaultContent: 'N/A' },
-                        { data: 'S+A+B+C+D+E' , defaultContent: 'N/A' , className: ' sum-column'},
-                        { data: '外資+投信' , defaultContent: 'N/A' , className: '外資投信-column'},
+                        { data: '近一日收盤價' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季股本' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季合約負債_流動' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '當月營收' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); }} ,
+                        { data: '近3月平均營收' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近12月平均營收' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: 'rev_year_growth_營收年增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: 'rev_month_growth_營收月增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季營業毛利率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季營業利益率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季稅後淨利率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季每股盈餘EPS' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '最近一季營業毛利年增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季營業利益年增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一季稅後淨利年增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: 'eps_growth_rate_EPS年增率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: '近一日殖利率' , defaultContent: 'N/A' , render: function(data) { return Math.round(data); } },
+                        { data: 'S+A+B+C+D+E' , defaultContent: 'N/A' , className: ' sum-column', render: function(data) { return Math.round(data); } },
+                        { data: '外資+投信' , defaultContent: 'N/A' , className: '外資投信-column', render: function(data) { return Math.round(data); } },
                         { data: 'category' , defaultContent: 'N/A' , className: 'category-column' }
 
 
