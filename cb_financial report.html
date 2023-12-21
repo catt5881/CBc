@@ -266,7 +266,7 @@
                           defaultContent: 'N/A', 
                           className: ' stock_id-column', 
                           render: function(data, type, row){
-                            var url='https://tw.stock.yahoo.com/quote/'+ Math.round(data)+'.TW/technical-analysis' ;
+                            var url='https://tw.stock.yahoo.com/quote/'+ Math.round(data)+'/technical-analysis' ;
                             return '<a href="' + url + '" target="_blank">' + Math.round(data) + '</a>';
                             }
                         },
@@ -301,9 +301,9 @@
 </script> 
 
 
-<div2 id="table-container" class="container mt-5">
+<div2 id="table3-container" class="container mt-5">
     <h2>上市櫃現股財報評分1~10級(分數越高，代表數值在歷史資料中，數值越大)</h2>
-    <table id="myTable" class="display">
+    <table id="myTable3" class="display">
         <thead>
             <tr>
                 <th>stock_id</th>
@@ -349,14 +349,14 @@
                 var filteredData = results.data.filter(function(row) {return row.stock_id && !isNaN(row.stock_id) && row.stock_id !== '0'; });
 
                 // 使用过滤后的数据初始化DataTables
-                $('#myTable').DataTable({
+                $('#myTable3').DataTable({
                     data: filteredData ,
                     columns: [
                         { data: 'stock_id' ,
                           defaultContent: 'N/A', 
                           className: ' stock_id-column', 
                           render: function(data, type, row){
-                            var url='https://tw.stock.yahoo.com/quote/'+ Math.round(data)+'.TW/technical-analysis' ;
+                            var url='https://tw.stock.yahoo.com/quote/'+ Math.round(data)+'/technical-analysis' ;
                             return '<a href="' + url + '" target="_blank">' + Math.round(data) + '</a>';
                             }
                         },
