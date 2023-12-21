@@ -105,10 +105,30 @@
         .category-column {
             width: 21%; /* 设置category列的宽度 */
         }
+        #snowflakes-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            opacity: 0.8;
+            font-size: 24px;
+            user-select: none;
+        }
+
+
     </style>
 
 </head>
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(216, 216, 216, 0.973);">
         <a class="navbar-brand" href="#">CBindex</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,6 +171,11 @@
 
     <!--<img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt=""> -->
     <img class="d-block" src="catt.jpg" id="imgCat" alt="">
+    
+
+    
+    
+
 
 
 
@@ -204,7 +229,7 @@
                 // 使用过滤后的数据初始化DataTables
                 $('#myTable2').DataTable({
                     data: filteredData ,
-                    order: [[19, 'desc' ]] ,// 0 表示第一列（stock_id），'desc' 表示降序，'asc' 表示升序
+                    order: [[19, 'desc' ]] ,// 0 表示第一列（stock_id），'desc' 表示降序
                     columns: [
                         { data: 'symbol' ,
                           defaultContent: 'N/A', 
@@ -245,8 +270,8 @@
 </script> 
 
 ...
-
-    <!-- Footer -->>
+    </div>
+    <!-- Footer -->
     <footer>
         <div3 class="container my-5">
 
@@ -327,7 +352,31 @@
             
         </div3>
     </footer>
-    <!-- Footer -->>
+    <!-- Footer -->
+
+    <!-- snowflakes -->
+    <div id="snowflakes-container"></div>
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+
+            document.getElementById('snowflakes-container').appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+    </script>
+    
 
 </body>
 </html>
