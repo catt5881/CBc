@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CB Charts</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/catt5881/CBc/main/logo.JPG">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/catt5881/CBc/main/logo_catt.png">
 
 
     <!-- 引入jQuery -->
@@ -105,7 +105,7 @@
         .category-column {
             width: 21%; /* 设置category列的宽度 */
         }
-
+ 
 
 
     </style>
@@ -157,9 +157,6 @@
     <img class="d-block" src="catt.jpg" id="imgCat" alt="">
 
  
-    
-
-
 
 
 <div2 id="table2-container" class="container mt-5">
@@ -200,6 +197,9 @@
         </tbody>
     </table>
 </div2>
+
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/allstock_評分.csv', {
@@ -208,6 +208,7 @@
             complete: function(results) {
                 // 过滤数据
                 var filteredData = results.data.filter(function(row) {return row.symbol  && row.symbol !== '0'; });
+
 
                 // 使用过滤后的数据初始化DataTables
                 $('#myTable2').DataTable({
@@ -247,6 +248,12 @@
 
                     ]
                 });
+
+
+
+
+
+
             }
         });
     });
