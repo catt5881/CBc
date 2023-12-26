@@ -41,7 +41,14 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: -20px;
-            
+        }
+        #imguse{
+            width: 400px;
+            height: 500px;
+            max-width: 100%;
+            max-height: 100%; 
+            margin-left: auto;
+            margin-right: auto;
 
         }
         #table-container {
@@ -115,7 +122,6 @@
                 <a class="dropdown-item" href="stock_financial report.html">上市櫃財報評分</a>
                 <a class="dropdown-item" href="Instructions.html">評分說明</a>
 
-
                 <!--
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a> 
@@ -137,74 +143,20 @@
     <!--<img class="d-block w-100" src="pig_head.jpg" id="imgHead" alt=""> -->
     <img class="d-block" src="catt.jpg" id="imgCat" alt=""> 
 
+     <h2 class="mt-3">　Percentile_評分算法(排序後取分位數，並四捨五入至整數)</h2>
+    <img class="mt-5 container" src="use.JPG" id="imguse" alt=""> 
+    <img class="mt-5 container" src="use_ex.JPG" id="imguse_ex" alt=""> 
 
 
-    <!-- 上市櫃_融資維持率-->
-    <div2 class="mt-5 container" id="上市櫃_融資維持率 iframe">
-        <h2>上市櫃_融資維持率</h2>
-        <iframe src="上市櫃_融資維持率.html" style="width:100%; height:800px;" alt="上市櫃_融資維持率"></iframe>
-    </div2>
-    <!-- dataframe table 上市櫃_融資維持率-->
-    <div2 id="table3-container" class="container mt-5">  
-        <h2>上市櫃_融資維持率</h2>
-        <table id="myTable3" class="display">
-            <thead>
-                <tr>
-                    <th>date</th>
-                    <th>融資維持率</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 数据将被动态填充 -->
-            </tbody>
-        </table>
-    </div2>
-    <script type="text/javascript">
-        function formatPercentage(data) {
-            if(data !== null && data !== undefined && !isNaN(parseFloat(data))) {
-                return parseFloat(data).toFixed(2) ;
-            }
-            return '';
-        }
-
-        $(document).ready(function() {
-            Papa.parse('https://raw.githubusercontent.com/catt5881/CBc/main/上市櫃_融資維持率.csv', {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    $('#myTable3').DataTable({
-                        data: results.data,//
-                        order: [[0, 'desc']],  // 根据日期列进行降序排序
-                        columns: [
-                            { data: 'date' , defaultContent: "無數據"},
-                            { data: '融資維持率' , defaultContent: "無數據"  }
-                        ]
-                    });
-                }
-            });
-        });
-    </script>
-
-
-    <!-- sharpe_TW-->
-    <div2 class="mt-5 container" id="sharpe_TW iframe">
-        <h2>sharpe_TW</h2>
-        <iframe src="sharpe_TW.html" style="width:100%; height:800px;" alt="sharpe_TW"></iframe>
-    </div2>
-
-    <!-- exchange rate-->
-    <div2 class="mt-5 container" id="exchange iframe">
-        <h2>exchange rate</h2>
-        <iframe src="exchange.html" style="width:100%; height:800px;" alt="exchange"></iframe>
-    </div2>
+ 
 
 ...
 
-    <!-- Footer -->>
+    <!-- Footer -->
     <footer>
     <div3 class="container my-5">
 
-        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+     <footer class="text-center text-white" style="background-color: #f1f1f1;">
         <!-- Grid container -->
         <div class="container pt-4">
         <!-- Section: Social media -->
@@ -278,7 +230,7 @@
         
     </div3>
     </footer>
-    <!-- Footer -->>
+    <!-- Footer -->
 
 </body>
 </html>
